@@ -1,0 +1,13 @@
+{
+  "name": "Streak — Daily habit chains",
+  "short_name": "Streak",
+  "description": "A tiny, private habit tracker for keeping daily chains.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f7f3",
+  "theme_color": "#f6f7f3",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
