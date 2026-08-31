@@ -2,7 +2,7 @@
 
 A deliberately small, local-first habit-chain app for doing the important things every day.
 
-**Use it now:** [streak-virid-eight.vercel.app](https://streak-virid-eight.vercel.app/)
+**Use it now:** [joon-streak.vercel.app](https://joon-streak.vercel.app/)
 
 No account, subscription, backend, notification system, or App Store install is required. Each browser keeps its own private copy of the data on that device.
 
@@ -27,7 +27,7 @@ Streak turns that paper-calendar idea into the smallest useful digital version: 
 
 You do not need an Apple Developer account or the App Store.
 
-1. On your iPhone, open **Safari** and visit [streak-virid-eight.vercel.app](https://streak-virid-eight.vercel.app/).
+1. On your iPhone, open **Safari** and visit [joon-streak.vercel.app](https://joon-streak.vercel.app/).
 2. Tap the **Share** button (the square with an upward arrow).
 3. Scroll down and tap **Add to Home Screen**.
 4. Turn on **Open as Web App** if your iPhone shows that option.
@@ -60,7 +60,7 @@ That makes the data:
 
 - **Device-bound:** your iPhone and laptop have separate histories.
 - **Browser/profile-bound:** Safari and Chrome on the same device have separate histories.
-- **Origin-bound:** `streak-virid-eight.vercel.app` and a custom domain have separate histories.
+- **Origin-bound:** `joon-streak.vercel.app` and a custom domain have separate histories.
 - **Private by default:** nothing is sent to a server by this app.
 
 It also means there is no sync, account recovery, export, import, or cloud backup in this version. Clearing browser/site data, removing the web app and its stored data, or losing the device can permanently remove the history.
