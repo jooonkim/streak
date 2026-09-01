@@ -43,7 +43,7 @@ button { padding: 0; touch-action: manipulation; }
   align-items: end;
   justify-content: space-between;
   gap: 20px;
-  padding: 12px 2px 24px;
+  padding: 8px 2px 20px;
 }
 
 .eyebrow {
@@ -67,7 +67,7 @@ h2 { letter-spacing: -0.025em; }
 }
 .daily-count span { color: #99a39d; font-weight: 550; }
 
-.add-form { display: grid; grid-template-columns: 1fr 48px; gap: 8px; margin-bottom: 18px; }
+.add-form { display: grid; grid-template-columns: 1fr 46px; gap: 8px; margin-bottom: 14px; }
 .add-form input {
   width: 100%;
   min-width: 0;
@@ -93,21 +93,21 @@ h2 { letter-spacing: -0.025em; }
 }
 .add-form button:disabled { opacity: 0.25; }
 
-.habit-list { display: grid; gap: 12px; }
+.habit-list { display: grid; gap: 8px; }
 .habit-card {
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 20px;
+  border-radius: 16px;
   background: rgba(255,255,255,0.92);
   box-shadow: 0 8px 26px rgba(30, 45, 37, 0.035);
 }
 
 .habit-card__top {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 48px;
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 10px;
   align-items: center;
-  padding: 18px 18px 12px;
+  padding: 14px 16px 8px;
 }
 
 .habit-link, .mini-history, .back-button, .delete-button, .today-toggle {
@@ -117,15 +117,15 @@ h2 { letter-spacing: -0.025em; }
   cursor: pointer;
 }
 
-.habit-link { display: grid; gap: 4px; min-width: 0; padding: 0; text-align: left; }
-.habit-name { overflow: hidden; font-size: 18px; font-weight: 720; letter-spacing: -0.02em; text-overflow: ellipsis; white-space: nowrap; }
+.habit-link { display: grid; gap: 2px; min-width: 0; padding: 0; text-align: left; }
+.habit-name { overflow: hidden; font-size: 17px; font-weight: 720; letter-spacing: -0.02em; text-overflow: ellipsis; white-space: nowrap; }
 .habit-streak { color: var(--muted); font-size: 13px; font-weight: 550; }
 .habit-streak b { padding-left: 2px; color: #a0a8a3; font-size: 18px; line-height: 0; }
 
 .today-toggle {
   display: inline-flex;
-  min-width: 48px;
-  height: 48px;
+  min-width: 44px;
+  height: 44px;
   align-items: center;
   justify-content: center;
   border: 1.5px solid #cdd4cf;
@@ -136,10 +136,10 @@ h2 { letter-spacing: -0.025em; }
 .today-toggle:active { transform: scale(0.92); }
 .today-toggle.is-complete { border-color: var(--green); background: var(--green); color: white; }
 .checkmark { font-size: 21px; font-weight: 800; }
-.mini-history { display: block; width: 100%; padding: 8px 18px 18px; text-align: left; }
+.mini-history { display: block; width: 100%; padding: 5px 16px 14px; text-align: left; }
 
 .history-grid {
-  --cell: min(3.45vw, 15px);
+  --cell: min(3vw, 13px);
   --gap: 3px;
   display: grid;
   grid-auto-flow: column;
@@ -201,6 +201,44 @@ h2 { letter-spacing: -0.025em; }
   padding: 24px 0 28px;
 }
 .detail-heading h1 { max-width: 420px; overflow-wrap: anywhere; font-size: clamp(34px, 9vw, 48px); }
+.habit-title-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; }
+.edit-name-button {
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--green-dark);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 680;
+}
+.rename-form { width: min(100%, 390px); }
+.rename-form input {
+  width: 100%;
+  height: 48px;
+  padding: 0 13px;
+  border: 1px solid #79a88c;
+  border-radius: 12px;
+  outline: none;
+  background: white;
+  color: var(--ink);
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 0 0 0 3px rgba(40,116,78,0.1);
+}
+.rename-actions { display: flex; gap: 14px; margin-top: 8px; }
+.rename-actions button {
+  min-height: 34px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--green-dark);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+.rename-actions button:last-child { color: var(--muted); }
+.rename-actions button:disabled { opacity: 0.35; }
 .today-toggle--detail {
   flex: 0 0 auto;
   width: auto;
@@ -230,6 +268,36 @@ h2 { letter-spacing: -0.025em; }
 .legend { display: flex; flex-wrap: wrap; gap: 9px 14px; margin-top: 13px; color: var(--muted); font-size: 10px; }
 .legend span { display: inline-flex; align-items: center; gap: 5px; }
 .legend .day-cell { --cell: 10px; flex: 0 0 10px; }
+.backdate-card {
+  display: grid;
+  gap: 14px;
+  margin-top: 12px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.78);
+}
+.backdate-card h2 { margin: 0 0 4px; font-size: 17px; }
+.backdate-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+.backdate-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.backdate-controls input,
+.backdate-controls button {
+  min-width: 0;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: white;
+  color: var(--ink);
+}
+.backdate-controls input { padding: 0 11px; }
+.backdate-controls button {
+  padding: 0 13px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+.backdate-controls button.is-complete { border-color: var(--green); background: var(--green); color: white; }
+.backdate-controls button:disabled { cursor: default; opacity: 0.35; }
 .delete-button { min-height: 44px; margin-top: 18px; padding: 0; color: var(--danger); font-size: 13px; font-weight: 650; }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
@@ -237,9 +305,14 @@ button:focus-visible, input:focus-visible { outline: 3px solid rgba(40,116,78,0.
 
 @media (min-width: 640px) {
   .app-shell { padding-left: 28px; padding-right: 28px; }
-  .history-grid { --cell: 15px; }
-  .habit-card__top { padding: 20px 22px 14px; }
-  .mini-history { padding: 8px 22px 22px; }
+  .history-grid { --cell: 13px; }
+  .habit-card__top { padding: 16px 20px 10px; }
+  .mini-history { padding: 6px 20px 16px; }
+}
+
+@media (max-width: 430px) {
+  .detail-heading { align-items: flex-start; }
+  .backdate-controls { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
