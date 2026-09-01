@@ -47,8 +47,10 @@ Important: use the same production URL every time. Browser storage is separated 
 - Shows a compact 12-week, GitHub-style binary history for each habit.
 - Opens a habit to a larger full-history view.
 - Distinguishes completed, missed, future, and today's outlined cells.
+- Renames a habit from its detail view.
+- Backdates or corrects completion for a chosen day in the past year from the detail view.
 - Adds habits by name and deletes them with confirmation.
-- Does not allow historical editing or custom schedules.
+- Does not allow future entries or custom schedules.
 
 There are deliberately no notes, tags, categories, colors, icons, folders, social features, points, achievements, accounts, notifications, or backend.
 
