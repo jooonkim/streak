@@ -17,11 +17,11 @@ The idea:
 3. Mark the day on a calendar.
 4. Keep the chain going.
 
-Watching the chain grow gives you a reason to show up again tomorrow. The point is not to build a perfect record. It is to spend less time deciding whether to do the work. If you miss a day, start a new chain the next day.
+I found this to be an incredibly effective way to maintain the discipline to build a new habit. My habits fall apart because of inconsistent follow-through more than they do because of the initial activation energy threshold. Sometimes following through is as simple as not wanting to break a chain.
 
-The method is often credited to Jerry Seinfeld, though Seinfeld has said he did not invent it. His name stuck anyway.
+The method is often credited to Jerry Seinfeld. You might be more familiar with this concept from Snapchat Streaks or GitHub commit history (the latter of which strongly influenced the UI design).
 
-I wanted the same idea on my phone without turning it into a big habit-tracking system. Tap once when you finish a habit. The grid shows the chain.
+I paid money for a similar app back in 2017, but I found that it didn't quite fit my use case. I created a lightweight version with local storage on my phone without turning it into a complicated habit-tracking system.
 
 ## Add it to your iPhone
 
