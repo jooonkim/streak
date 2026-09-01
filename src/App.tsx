@@ -101,6 +101,9 @@ export default function StreakApp() {
   const [newHabit, setNewHabit] = useState('');
   const [todayKey, setTodayKey] = useState('');
   const [ready, setReady] = useState(false);
+  const [editingName, setEditingName] = useState(false);
+  const [nameDraft, setNameDraft] = useState('');
+  const [backdateKey, setBackdateKey] = useState('');
 
   useEffect(() => {
     let savedHabits: Habit[] = [];
@@ -152,14 +155,42 @@ export default function StreakApp() {
     setNewHabit('');
   }
 
-  function toggleToday(id: string) {
+  function toggleDate(id: string, key: string) {
+    if (!key || key > todayKey) return;
     setHabits((items) => items.map((habit) => {
       if (habit.id !== id) return habit;
       const completed = new Set(habit.completedOn);
-      if (completed.has(todayKey)) completed.delete(todayKey);
-      else completed.add(todayKey);
-      return { ...habit, completedOn: [...completed].sort() };
+      const wasComplete = completed.has(key);
+      if (wasComplete) completed.delete(key);
+      else completed.add(key);
+      return {
+        ...habit,
+        createdOn: !wasComplete && key < habit.createdOn ? key : habit.createdOn,
+        completedOn: [...completed].sort(),
+      };
     }));
+  }
+
+  function toggleToday(id: string) {
+    toggleDate(id, todayKey);
+  }
+
+  function openHabit(habit: Habit) {
+    setEditingName(false);
+    setNameDraft(habit.name);
+    setBackdateKey(dateKey(shift(fromKey(todayKey), -1)));
+    setSelectedId(habit.id);
+  }
+
+  function renameHabit(event: React.SyntheticEvent<HTMLFormElement, SubmitEvent>, id: string) {
+    event.preventDefault();
+    const name = nameDraft.trim().slice(0, 60);
+    if (!name) return;
+    setHabits((items) => items.map((habit) => (
+      habit.id === id ? { ...habit, name } : habit
+    )));
+    setNameDraft(name);
+    setEditingName(false);
   }
 
   function deleteHabit(habit: Habit) {
@@ -178,6 +209,8 @@ export default function StreakApp() {
   if (selected) {
     const stats = streaks(selected, todayKey);
     const done = selected.completedOn.includes(todayKey);
+    const backdateDone = selected.completedOn.includes(backdateKey);
+    const earliestBackdate = dateKey(shift(fromKey(todayKey), -365));
     return (
       <main className="app-shell">
         <section className="history-view">
@@ -187,7 +220,40 @@ export default function StreakApp() {
           <div className="detail-heading">
             <div>
               <p className="eyebrow">Habit history</p>
-              <h1>{selected.name}</h1>
+              {editingName ? (
+                <form className="rename-form" onSubmit={(event) => renameHabit(event, selected.id)}>
+                  <label className="sr-only" htmlFor="edit-habit-name">Habit name</label>
+                  <input
+                    id="edit-habit-name"
+                    value={nameDraft}
+                    onChange={(event) => setNameDraft(event.target.value)}
+                    maxLength={60}
+                    autoComplete="off"
+                  />
+                  <div className="rename-actions">
+                    <button type="submit" disabled={!nameDraft.trim()}>Save</button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setNameDraft(selected.name);
+                        setEditingName(false);
+                      }}
+                    >Cancel</button>
+                  </div>
+                </form>
+              ) : (
+                <div className="habit-title-row">
+                  <h1>{selected.name}</h1>
+                  <button
+                    className="edit-name-button"
+                    onClick={() => {
+                      setNameDraft(selected.name);
+                      setEditingName(true);
+                    }}
+                    aria-label={`Edit ${selected.name} name`}
+                  >Edit name</button>
+                </div>
+              )}
             </div>
             <button
               className={`today-toggle today-toggle--detail ${done ? 'is-complete' : ''}`}
@@ -217,6 +283,30 @@ export default function StreakApp() {
               <span><i className="day-cell" /> Missed</span>
               <span><i className="day-cell is-blank" /> Future</span>
               <span><i className="day-cell is-today" /> Today</span>
+            </div>
+          </section>
+
+          <section className="backdate-card" aria-labelledby="backdate-title">
+            <div>
+              <h2 id="backdate-title">Edit a past day</h2>
+              <p>Forgot to log it? Choose a date from the past year.</p>
+            </div>
+            <div className="backdate-controls">
+              <label className="sr-only" htmlFor="backdate">Date to edit</label>
+              <input
+                id="backdate"
+                type="date"
+                value={backdateKey}
+                min={earliestBackdate}
+                max={dateKey(shift(fromKey(todayKey), -1))}
+                onChange={(event) => setBackdateKey(event.target.value)}
+              />
+              <button
+                type="button"
+                className={backdateDone ? 'is-complete' : ''}
+                onClick={() => toggleDate(selected.id, backdateKey)}
+                disabled={!backdateKey || backdateKey >= todayKey}
+              >{backdateDone ? 'Undo completion' : 'Mark complete'}</button>
             </div>
           </section>
 
@@ -273,7 +363,7 @@ export default function StreakApp() {
               return (
                 <article className="habit-card" key={habit.id}>
                   <div className="habit-card__top">
-                    <button className="habit-link" onClick={() => setSelectedId(habit.id)}>
+                    <button className="habit-link" onClick={() => openHabit(habit)}>
                       <span className="habit-name">{habit.name}</span>
                       <span className="habit-streak">{stats.current} day streak <b aria-hidden="true">›</b></span>
                     </button>
@@ -286,7 +376,7 @@ export default function StreakApp() {
                       <span className="checkmark" aria-hidden="true">✓</span>
                     </button>
                   </div>
-                  <button className="mini-history" onClick={() => setSelectedId(habit.id)} aria-label={`Open history for ${habit.name}`}>
+                  <button className="mini-history" onClick={() => openHabit(habit)} aria-label={`Open history for ${habit.name}`}>
                     <HistoryGrid habit={habit} weeks={12} todayKey={todayKey} />
                   </button>
                 </article>
